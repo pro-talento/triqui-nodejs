@@ -1,0 +1,20 @@
+{
+  "name": "triqui-nodejs",
+  "version": "1.0.0",
+  "description": "Juego de Triqui en la consola, con Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pro-talento/triqui-nodejs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pro-talento/triqui-nodejs/issues"
+  },
+  "homepage": "https://github.com/pro-talento/triqui-nodejs#readme"
+}
