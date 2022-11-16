@@ -2,6 +2,7 @@ const chalk = require("chalk")
 const fs = require('fs')
 const Prompt = require('prompt-sync')
 const prompt = Prompt({ sigint: true })
+console.log("hello world");
 
 const name = prompt('Cuál es tu nombre ? ')
 
