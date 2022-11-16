@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/pro-talento/triqui-nodejs/issues"
   },
-  "homepage": "https://github.com/pro-talento/triqui-nodejs#readme"
+  "homepage": "https://github.com/pro-talento/triqui-nodejs#readme",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  }
 }
