@@ -12,4 +12,6 @@
 //   Extra: Usar try/catch en algún proceso para manejar error
 //   Extra: Usar if/else para hacer un poco más complejo el proceso
 
-// 4. En cuanto este terminada la actividad. Hacer push de los cambios a tu rama en Github. 
+// 4. En cuanto este terminada la actividad. Hacer push de los cambios a tu rama en Github.
+
+console.log("hello world!");
