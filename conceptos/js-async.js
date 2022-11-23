@@ -13,6 +13,7 @@ function irPorElPan() {
   return new Promise((resolve) => {
     setTimeout(() => {
       console.log('Llegué con el pan.');
+      // throw new Error('error')
       resolve();
     }, 5000);
   })
@@ -28,7 +29,7 @@ async function cenar() {
   //         console.log('Después de prepara la cena');
   //       })
   //   })
-  irPorElPan().then(() => null) // Non-blocking
+  irPorElPan().then(() => null).catch((err) => console.error(err)) // Non-blocking
   console.log('Después de ir por el 🍞');
   await prepararCena() // Blocking
   console.log('Después de prepara la cena');
