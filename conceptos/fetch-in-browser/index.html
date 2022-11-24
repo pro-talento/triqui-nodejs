@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Busca una canción</title>
+</head>
+<body>
+  
+
+  <div>
+    <h3>Astista</h3>
+    <input id="artist-search-input" name="artist" placeholder="Busca a un artista"/>
+    <hr>
+    <div>
+      <ol id="artists-list">
+        <li></li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    const SPOTIFY_TOKEN = 'BQDx4teO9GHRi8q5Xn053aOZGvkwuCEqVOVCCqwFneFqZmi9xKD5y9lINkbHo-Kda4ZCEP6HTgesrjqzwIahYwJq6eLtckCaTx6wuc1v3DQIUNf7d2WH8XA4n7sRHbrz8VWGMH8Af0-mi7OWhsoVeI6AIucF3lraWQqbOb730LPIILez';
+
+    const artistSearchInput = document.getElementById('artist-search-input');
+    artistSearchInput.addEventListener('input', onSearchArtist);
+
+    const artistListContainer = document.getElementById('artist-list');
+
+    function generateArtistsElements(body) { 
+      const items = body.artists.items;
+      
+    }
+
+    function onSearchArtist(e) { 
+      fetch(`https://api.spotify.com/v1/search?q=${e.target.value}&type=track%2Cartist&market=ES&limit=10&offset=5`, 
+      {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${SPOTIFY_TOKEN}`,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then(body => generateArtistsElements(body))
+    }
+  </script>
+</body>
+</html>
