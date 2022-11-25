@@ -15,14 +15,22 @@
       name="artist-search"
       id="artist-search"
     />
+
+    <div>
+      <p>Lo que buscaste fue: <span id="search-string">Nada aún :(</span></p>
+    </div>
   </div>
 
   <script>
     const artistSeachInput = document.getElementById('artist-search');
     artistSeachInput.addEventListener('input', onSearchArtist);
 
+    const searchStringLabel = document.getElementById('search-string');
+
     function onSearchArtist(event) {
-      console.log(event.target.value);
+      const stringToSearch = event.target.value;
+
+      searchStringLabel.innerText = stringToSearch;
     }
   </script>
 </body>
