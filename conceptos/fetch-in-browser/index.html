@@ -75,8 +75,11 @@
           artistsList.innerHTML = `<p>Error :(</p>`
         })
       // }, 3000)
+      
+      searchStringLabel.innerText = stringToSearch;
+    }
 
-      function fetchTopTracks(artistId) {
+    function fetchTopTracks(artistId) {
         fetch(`https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=CO`, {
           method: 'GET',
           headers: {
@@ -89,9 +92,6 @@
           tracksList.innerHTML = topTracks.map(track => `<li id=${track.id}>${track.name}</li>`).join('');
         })
       }
-      
-      searchStringLabel.innerText = stringToSearch;
-    }
   </script>
 </body>
 </html>
