@@ -34,28 +34,38 @@
     const searchStringLabel = document.getElementById('search-string');
     const artistsList = document.getElementById('artists-list');
 
+    // let idToClear = null;
+
     function onSearchArtist(event) {
       const stringToSearch = event.target.value;
-
+      // artistsList.innerHTML = `<p>Cargando...</p>`;
       // TODO: Mandar a llamar API
-      fetch(`https://api.spotify.com/v1/search?q=${stringToSearch}&type=artist&market=CO&limit=10&offset=0`, {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${SPOTIFY_TOKEN}`,
+      // if (idToClear) {
+      //   clearTimeout(idToClear);
+      // }
 
-        }
-      })
-      .then(res => res.json())
-      .then(body => {
-        const top10 = body.artists.items;
-        console.log(top10)
-        const top10InHtmlArray = top10.map(artist => `<li id=${artist.id}>${artist.name}</li>`);
-        console.log(top10InHtmlArray)
-        const top10InHtmlString = top10InHtmlArray.join('');
-        console.log(top10InHtmlString);
-        artistsList.innerHTML = top10InHtmlString;
-      })
-      .catch(err => console.error(err))
+      // idToClear = setTimeout(() => {
+        fetch(`https://api.spotify.com/v1/search?q=${stringToSearch}&type=artist&market=CO&limit=10&offset=0`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${SPOTIFY_TOKEN}`,
+  
+          }
+        })
+        .then(res => res.json())
+        .then(body => {
+          const top10 = body.artists.items;
+          console.log(top10)
+          const top10InHtmlArray = top10.map(artist => `<li id=${artist.id}>${artist.name}</li>`);
+          console.log(top10InHtmlArray)
+          const top10InHtmlString = top10InHtmlArray.join('');
+          console.log(top10InHtmlString);
+          artistsList.innerHTML = top10InHtmlString;
+        })
+        .catch(err =>  {
+          artistsList.innerHTML = `<p>Error :(</p>`
+        })
+      // }, 3000)
       
       searchStringLabel.innerText = stringToSearch;
     }
