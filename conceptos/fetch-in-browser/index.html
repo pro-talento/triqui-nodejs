@@ -25,16 +25,21 @@
       </ol>
     </div>
     <hr>
+    <div>
+      <ol id="tracks-list">
+      </ol>
+    </div>
   </div>
 
   <script>
-    const SPOTIFY_TOKEN = 'BQBZWGlM0Qtfcz3XOPeEOEGoDL3hlYpjkzXoISIKavwEeijs4oWPNDw65RQzEIuj1rTeqWv9pPy-4gpEWhFbH1c-EbHfEjBqgmvQPpwtp_WMfDmqkTxsx4WF3CIdKPXI1FRPKOvTb_LezCYj1wAo_nA_B6rmAzjV6qNOeFKvvszj74Hx';
+    const SPOTIFY_TOKEN = 'BQC3iZlhdAtVFrpGl9S33Kurwjb34DZMdQmAkUr1D_Qw-lf6rPbQLF-lXD9SMacjELV-dalPczaPbDjQpUQs53Oo3piEh6gsb9oDVFr6iKWIA3OhRK-ExiQfQbuf3VNjo_uZaTb1ej8JoQI50rutnY3tg-LVYKl_1s4cZe3Q7HIuJsGh';
 
     const artistSeachInput = document.getElementById('artist-search');
     artistSeachInput.addEventListener('input', onSearchArtist);
 
     const searchStringLabel = document.getElementById('search-string');
     const artistsList = document.getElementById('artists-list');
+    const tracksList = document.getElementById('tracks-list');
 
     // let idToClear = null;
 
@@ -57,17 +62,33 @@
         .then(res => res.json())
         .then(body => {
           const top10 = body.artists.items;
-          console.log(top10)
-          const top10InHtmlArray = top10.map(artist => `<li id=${artist.id}>${artist.name}</li>`);
-          console.log(top10InHtmlArray)
+          // console.log(top10)
+          const top10InHtmlArray = top10.map(artist => `<li id=${artist.id} class="artist">${artist.name}</li>`);
+          // console.log(top10InHtmlArray)
           const top10InHtmlString = top10InHtmlArray.join('');
-          console.log(top10InHtmlString);
+          // console.log(top10InHtmlString);
           artistsList.innerHTML = top10InHtmlString;
+          const elements = document.querySelectorAll('.artist')
+          elements.forEach(artist => artist.addEventListener('click', (e) => fetchTopTracks(e.target.id)))
         })
         .catch(err =>  {
           artistsList.innerHTML = `<p>Error :(</p>`
         })
       // }, 3000)
+
+      function fetchTopTracks(artistId) {
+        fetch(`https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=CO`, {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${SPOTIFY_TOKEN}`
+          }
+        })
+        .then(res => res.json())
+        .then(body => {
+          const topTracks = body.tracks;
+          tracksList.innerHTML = topTracks.map(track => `<li id=${track.id}>${track.name}</li>`).join('');
+        })
+      }
       
       searchStringLabel.innerText = stringToSearch;
     }
