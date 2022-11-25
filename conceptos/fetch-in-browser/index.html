@@ -8,5 +8,22 @@
 </head>
 <body>
   <h1>App de Música</h1>
+  <div>
+    <input 
+      type="text" 
+      placeholder="Busca un artista" 
+      name="artist-search"
+      id="artist-search"
+    />
+  </div>
+
+  <script>
+    const artistSeachInput = document.getElementById('artist-search');
+    artistSeachInput.addEventListener('input', onSearchArtist);
+
+    function onSearchArtist(event) {
+      console.log(event.target.value);
+    }
+  </script>
 </body>
 </html>
