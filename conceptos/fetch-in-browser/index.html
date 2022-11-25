@@ -19,6 +19,10 @@
     <div>
       <p>Lo que buscaste fue: <span id="search-string">Nada aún :(</span></p>
     </div>
+    <div>
+      <ol id="artists-list">
+      </ol>
+    </div>
   </div>
 
   <script>
@@ -28,6 +32,7 @@
     artistSeachInput.addEventListener('input', onSearchArtist);
 
     const searchStringLabel = document.getElementById('search-string');
+    const artistsList = document.getElementById('artists-list');
 
     function onSearchArtist(event) {
       const stringToSearch = event.target.value;
@@ -43,7 +48,12 @@
       .then(res => res.json())
       .then(body => {
         const top10 = body.artists.items;
-        console.log(top10);
+        console.log(top10)
+        const top10InHtmlArray = top10.map(artist => `<li id=${artist.id}>${artist.name}</li>`);
+        console.log(top10InHtmlArray)
+        const top10InHtmlString = top10InHtmlArray.join('');
+        console.log(top10InHtmlString);
+        artistsList.innerHTML = top10InHtmlString;
       })
       .catch(err => console.error(err))
       
