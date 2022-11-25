@@ -22,6 +22,8 @@
   </div>
 
   <script>
+    const SPOTIFY_TOKEN = 'BQBZWGlM0Qtfcz3XOPeEOEGoDL3hlYpjkzXoISIKavwEeijs4oWPNDw65RQzEIuj1rTeqWv9pPy-4gpEWhFbH1c-EbHfEjBqgmvQPpwtp_WMfDmqkTxsx4WF3CIdKPXI1FRPKOvTb_LezCYj1wAo_nA_B6rmAzjV6qNOeFKvvszj74Hx';
+
     const artistSeachInput = document.getElementById('artist-search');
     artistSeachInput.addEventListener('input', onSearchArtist);
 
@@ -30,6 +32,21 @@
     function onSearchArtist(event) {
       const stringToSearch = event.target.value;
 
+      // TODO: Mandar a llamar API
+      fetch(`https://api.spotify.com/v1/search?q=${stringToSearch}&type=artist&market=CO&limit=10&offset=0`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${SPOTIFY_TOKEN}`,
+
+        }
+      })
+      .then(res => res.json())
+      .then(body => {
+        const top10 = body.artists.items;
+        console.log(top10);
+      })
+      .catch(err => console.error(err))
+      
       searchStringLabel.innerText = stringToSearch;
     }
   </script>
